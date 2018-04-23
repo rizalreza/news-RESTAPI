@@ -1,0 +1,17 @@
+<?php
+
+namespace App;
+
+use Illuminate\Database\Eloquent\Model;
+
+class Topic extends Model
+{
+    protected $fillable = [
+        'name',
+    ];
+
+    public function newss()
+    {
+      return $this->belongsToMany(News::class);
+    }
+}
