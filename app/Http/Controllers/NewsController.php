@@ -138,13 +138,13 @@ class NewsController extends Controller
 
       //Saat update memasukan topic_id yang belum ada akan menambahkan topic_id baru
       //Untuk menghapus Topic tertentu di dalam News bisa dilakukan di  endpoint registration 
-
+     
       if($news->update()){
          $news->topics()->attach($topic_id);
          $news->view_news = [
           'href' => 'api/v1/news/' . $news->id,
           'method' => 'GET'
-      ];
+          ];
           $message = [
             'msg' => 'News updated',
             'news' => $news
@@ -155,7 +155,7 @@ class NewsController extends Controller
       $response = [
         'msg' => 'Error during update'
       ];
-
+      
       return response()->json($response,404);
         
     }
@@ -168,18 +168,13 @@ class NewsController extends Controller
      */
     public function destroy($id)
     {
-        $news = News::findOrFail($id);
-        $topics = $news->topics;
-        $news->topics()->detach();
+        $news = News::where('id', $id)->get();
 
-        if (!$news->delete()) {
-          foreach ($topics as $topic) {
-            $news->users()->attach($topics);
-          }
-        return response()->json([
-          'msg' => 'Delete failed',
-        ], 404);
-        }
+        if(($news)->count() > 0) {
+          $news = News::findOrFail($id);
+          $topics = $news->topics;
+          $news->topics()->detach();
+          $news->delete();
 
         $response = [
           'msg' => 'News deleted',
@@ -192,5 +187,15 @@ class NewsController extends Controller
 
         return response()->json($response, 200);
 
+        };
+
+        $response = [
+          'msg' => 'News not found !'
+        ];
+
+        return response()->json($response, 404);
     }
+
+
+       
 }
