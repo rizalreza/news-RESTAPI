@@ -62,7 +62,7 @@ class NewsController extends Controller
       if ($news->save()){
           $news->topics()->attach($topic_id);
           $news->view_news = [
-            'href' => 'api/v1/news' . $news->id,
+            'href' => 'api/v1/news/' . $news->id,
           ];
           $message = [
             'msg' => 'News Created',
@@ -103,6 +103,7 @@ class NewsController extends Controller
       return response()->json($response, 200);
       };
 
+      //Response ketika id yang dipilih tidak ada
       $response = [
         'msg' => 'News not found'
       ];
@@ -170,6 +171,8 @@ class NewsController extends Controller
     {
         $news = News::where('id', $id)->get();
 
+        // Menghapus News sekaligus melepaskan relasenya dari Topic
+
         if(($news)->count() > 0) {
           $news = News::findOrFail($id);
           $topics = $news->topics;
@@ -179,7 +182,7 @@ class NewsController extends Controller
         $response = [
           'msg' => 'News deleted',
           'create' => [
-            'href' => 'api/v1/news',
+            'href' => 'api/v1/news/',
             'method' => 'POST',
             'params' => 'title, content, status'
           ]
@@ -188,6 +191,8 @@ class NewsController extends Controller
         return response()->json($response, 200);
 
         };
+
+        //Response ketika id yang dipilih tidak tersedia
 
         $response = [
           'msg' => 'News not found !'
