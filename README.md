@@ -38,21 +38,21 @@ Note :
 <img src="https://i.imgur.com/gfIx6AM.png" width="700">
 
 Note :
-* Menampilkan News Dengan status Publish
+* Menampilkan News dengan status Publish
 
 **List Draft News**
 
 <img src="https://i.imgur.com/FtfpqOJ.png" width="700">
 
 Note :
-* Menampilkan News Dengan status Draft
+* Menampilkan News dengan status Draft
 
 **Detail News**
 
 <img src="https://i.imgur.com/xSyTK85.png" width="700">
 
 Note :
-* Menampilkan data News dengan Seluruh Topic yang ada di dalamnya
+* Menampilkan data News dengan seluruh Topic yang ada di dalamnya
 
 
 **Add More Topic To News**
