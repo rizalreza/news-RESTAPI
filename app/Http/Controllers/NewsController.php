@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use DB;
 use App\News;
 use Illuminate\Http\Request;
+use Illuminate\Database\Eloquent\Builder;
 
 class NewsController extends Controller
 {
@@ -14,8 +16,8 @@ class NewsController extends Controller
      */
     public function index()
     {  
-      //Menampilkan seluruh news
-        $newss = News:: all();
+      //Menampilkan seluruh news 
+    	$newss = News::all();
         foreach ($newss as $news) {
           $news->view_news = [  
             'href' => 'api/v1/news/' . $news->id,
@@ -24,6 +26,42 @@ class NewsController extends Controller
         }
         $response = [
           'msg' => 'List of all news',
+          'news' => $newss
+        ];
+
+        return response()->json($response, 200);
+    }
+
+    public function getPublish()
+    {  
+      //Menampilkan News dengan status 1 dimana status 1 di inisialisasikan untuk status Publish 
+    	$newss = DB::table('news')->where('news.status','=', 1)->get();
+        foreach ($newss as $news) {
+          $news->view_news = [  
+            'href' => 'api/v1/news/' . $news->id,
+            'method' => 'GET'
+          ];
+        }
+        $response = [
+          'msg' => 'List of published news',
+          'news' => $newss
+        ];
+
+        return response()->json($response, 200);
+    }
+
+    public function getDraft()
+    {  
+      //Menampilkan News dengan status 2 dimana status 2 di inisialisasikan untuk status Draft
+    	$newss = DB::table('news')->where('news.status','=', 2)->get();
+        foreach ($newss as $news) {
+          $news->view_news = [  
+            'href' => 'api/v1/news/' . $news->id,
+            'method' => 'GET'
+          ];
+        }
+        $response = [
+          'msg' => 'List of draft news',
           'news' => $newss
         ];
 

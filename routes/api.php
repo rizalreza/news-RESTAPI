@@ -19,8 +19,11 @@ Route::group(['prefix' => 'v1'], function() {
 	    'except' => ['create','edit']
 	  ]);
 
+	Route::get('publish/news','NewsController@getPublish')->name('news.publish');
+	Route::get('draft/news','NewsController@getDraft')->name('news.draft');
+
 	Route::resource('news/registration', 'RegisterController', [
-	    'only' => ['store','destroy']
+	    'only' => ['store']
 	  ]);
 
 	Route::resource('topics', 'TopicController', [
