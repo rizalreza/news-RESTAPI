@@ -1,6 +1,6 @@
 ## About
 
-Repository berisi contoh RESTAPI untuk portal berita 
+Repository berisi contoh RESTAPI untuk portal berita yang dibuat dengan Laravel.
 
 ## Note
 
