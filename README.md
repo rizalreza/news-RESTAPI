@@ -1,4 +1,4 @@
-## About
+## Note
 
 Repository ini juga sudah di deploy ke hosting heroku di link [ini](https://enigmatic-ocean-57875.herokuapp.com/)
 
